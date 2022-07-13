@@ -4,53 +4,48 @@
 </script>
 
 {#await $Weather}
-	<div class="loading">
-		<Loading />
-	</div>
-{:then data}
-	<main>
-		<header>
-			<figure
-				class="icon"
-				title="Locations favorite"
-				style="margin-right: 10px;"
-			>
-				<i class="fa fa-globe" />
-			</figure>
-			<span>Location</span>
-		</header>
-		{#if $Weather}
+	<Loading />
+{:then $Weather}
+	{#if $Weather?.current}
+		<main>
+			<header>
+				<figure
+					class="icon"
+					title="Locations favorite"
+					style="margin-right: 10px;"
+				>
+					<i class="fa fa-globe" />
+				</figure>
+				<span>Location</span>
+			</header>
+
 			<div class="details">
 				<span>
-					Name: {$Weather?.location.name || ''}
+					Name: {$Weather.location.name || ''}
 				</span>
 
 				<span>
-					Region: {$Weather?.location.region || ''}
+					Region: {$Weather.location.region || ''}
 				</span>
 
 				<span>
-					Country: {$Weather?.location.country || ''}
+					Country: {$Weather.location.country || ''}
 				</span>
 
 				<span>
-					Localtime: {$Weather?.location.localtime}
+					Localtime: {$Weather.location.localtime}
 				</span>
 				<span>
-					Latitude: {$Weather?.location.lat}
+					Latitude: {$Weather.location.lat}°
 				</span>
 				<span>
-					Longitude: {$Weather?.location.lon}
+					Longitude: {$Weather.location.lon}°
 				</span>
 			</div>
-		{:else}
-			<article class="hentry post video">
-				<div style="width: 100%; display: flex; justify-content: center;">
-					<p class="h1 text-center">No hay publicaciones a la vista</p>
-				</div>
-			</article>
-		{/if}
-	</main>
+		</main>
+	{:else if $Weather?.error}
+		{$Weather?.error?.message}
+	{/if}
 {/await}
 
 <style>
@@ -61,6 +56,7 @@
 		margin-bottom: 2rem;
 		display: flex;
 		flex-direction: column;
+		height: 100%;
 	}
 
 	header {

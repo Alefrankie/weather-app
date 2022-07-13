@@ -1,7 +1,8 @@
 <script>
 	import Details from '$lib/components/Weather/Details.svelte'
 	import Location from '$lib/components/Weather/Location.svelte'
-	import Points from '$lib/components/Widgets/Points.svelte'
+	import Graphics from '$lib/components/Widgets/Graphics.svelte'
+	import { Weather } from '$lib/stores/Weather'
 </script>
 
 <svelte:head>
@@ -10,17 +11,37 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-sm-12 col-md-12 col-lg-4">
-			<Location />
-		</div>
+		{#if $Weather?.current}
+			<div class="col-sm-12 col-md-12 col-lg-4">
+				<Location />
+			</div>
 
-		<div class="col-sm-12 col-md-12 col-lg-4">
-			<Points />
-			<!-- <Suggestions /> -->
-		</div>
+			<div class="col-sm-12 col-md-12 col-lg-4">
+				<Graphics />
+			</div>
 
-		<div class="col-sm-12 col-md-12 col-lg-4">
-			<Details />
-		</div>
+			<div class="col-sm-12 col-md-12 col-lg-4">
+				<Details />
+			</div>
+		{:else}
+			<h2>Welcome to Weather App</h2>
+			<span> You can make a search for a location </span>
+		{/if}
 	</div>
 </div>
+
+<style>
+	h2 {
+		display: flex;
+		justify-content: center;
+		color: var(--primary-color);
+		font-size: 30px;
+	}
+
+	span {
+		display: flex;
+		justify-content: center;
+		color: var(--primary-color);
+		font-size: 30px;
+	}
+</style>

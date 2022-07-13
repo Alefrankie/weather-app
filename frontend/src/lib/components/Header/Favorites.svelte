@@ -1,15 +1,7 @@
 <script lang="ts">
-	import { session } from '$app/stores'
-	import { Chats, notReads } from '$lib/stores/Chats'
-	import Avatar from '$lib/components/Avatar.svelte'
-	import LinkToUser from '../Links/LinkToUser.svelte'
 	import { useTimeAgo } from '$lib/hooks/useTimeAgo'
 
 	// Chats.getChats($session._id)
-
-	function markAllRead() {
-		Chats.markAllRead($session._id)
-	}
 </script>
 
 <main>

@@ -3,7 +3,7 @@
 	import History from './History.svelte'
 	import ProfileOptions from './ProfileOptions.svelte'
 	import LocationSearchEngine from './LocationSearchEngine.svelte'
-	import { page } from '$app/stores'
+	import { page, session } from '$app/stores'
 </script>
 
 <header>
@@ -14,13 +14,15 @@
 		</a>
 	{/if}
 
-	<div class="menu">
-		<ProfileOptions />
+	{#if $session.authenticated}
+		<div class="menu">
+			<ProfileOptions />
 
-		<History />
+			<History />
 
-		<Favorites />
-	</div>
+			<Favorites />
+		</div>
+	{/if}
 </header>
 
 <style>

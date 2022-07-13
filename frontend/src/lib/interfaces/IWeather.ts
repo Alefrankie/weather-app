@@ -38,4 +38,7 @@ export interface IWeather {
 		gust_mph: number
 		gust_kph: number
 	}
+	error: {
+		message: string
+	}
 }

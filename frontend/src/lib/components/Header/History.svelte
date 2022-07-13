@@ -12,7 +12,6 @@
 </script>
 
 <script lang="ts">
-	import Avatar from '$lib/components/Avatar.svelte'
 	import { useTimeAgo } from '$lib/hooks/useTimeAgo'
 </script>
 

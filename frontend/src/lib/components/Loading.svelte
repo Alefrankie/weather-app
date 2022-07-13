@@ -1,11 +1,18 @@
-<div class="lds-ellipsis">
-	<div />
-	<div />
-	<div />
-	<div />
+<div class="loading">
+	<div class="lds-ellipsis">
+		<div />
+		<div />
+		<div />
+		<div />
+	</div>
 </div>
 
 <style>
+	.loading {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 	.lds-ellipsis {
 		display: inline-block;
 		position: relative;
