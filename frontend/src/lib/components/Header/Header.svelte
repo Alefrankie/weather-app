@@ -2,12 +2,12 @@
 	import Favorites from '$lib/components/Header/Favorites.svelte'
 	import History from './History.svelte'
 	import ProfileOptions from './ProfileOptions.svelte'
-	import UserSearchEngine from './UserSearchEngine.svelte'
+	import LocationSearchEngine from './LocationSearchEngine.svelte'
 	import { page } from '$app/stores'
 </script>
 
 <header>
-	<UserSearchEngine />
+	<LocationSearchEngine />
 	{#if $page.url.pathname !== '/'}
 		<a href="/">
 			<i class="fas fa-home" />

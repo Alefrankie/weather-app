@@ -1,7 +1,7 @@
 <script>
 	import { session } from '$app/stores'
-	import Thinking from '$lib/components/Timeline/Thinking.svelte'
-	import Timeline from '$lib/components/Timeline/Timeline.svelte'
+	import Thinking from '$lib/components/Weather/Thinking.svelte'
+	import Timeline from '$lib/components/Weather/Location.svelte'
 	import CreateEvent from '$lib/components/Widgets/CreateEvent.svelte'
 	import CreateStreaming from '$lib/components/Widgets/CreateStreaming.svelte'
 </script>

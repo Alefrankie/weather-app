@@ -18,32 +18,21 @@
 </script>
 
 <svelte:head>
-	<link rel="stylesheet" href="/css/voyer/theme-font.min.css" />
-	<link rel="stylesheet" href="/css/voyer/bootstrap.css" />
-	<link rel="stylesheet" href="/css/voyer/fontawesome-all.min.css" />
-	<link rel="stylesheet" href="/css/voyer/main.css" />
+	<link rel="stylesheet" href="/css/theme-font.min.css" />
+	<link rel="stylesheet" href="/css/bootstrap.css" />
+	<link rel="stylesheet" href="/css/fontawesome.min.css" />
+	<link rel="stylesheet" href="/css/all.min.css" />
 	<link rel="stylesheet" href="/css/generics.css" />
 </svelte:head>
 
 <Header />
 <slot />
-<!-- <OnlineBar /> -->
-<a
-	class="back-to-top"
-	href="/#"
-	style="display: flex; justify-content: center; align-items: center;"
->
-	<i
-		class="fas fa-arrow-up"
-		style="color: var(--primary-color); font-size: 16px"
-	/>
-</a>
 
 <div>
-	<script src="/js/voyer/polyfills.js"></script>
-	<script src="/js/voyer/webp-hero.js"></script>
-	<script src="/js/voyer/bootstrap.js"></script>
-	<script src="/js/voyer/svg-loader.js"></script>
+	<script src="/js/polyfills.js"></script>
+	<script src="/js/webp-hero.js"></script>
+	<script src="/js/bootstrap.js"></script>
+	<script src="/js/svg-loader.js"></script>
 </div>
 
 <style>
@@ -56,6 +45,11 @@
 		--border-color: #3e4042;
 		--body-color: #18191a;
 		--border-radius-block: 10px;
+	}
+
+	:global(.icon) {
+		font-size: 18px;
+		color: var(--primary-color);
 	}
 
 	:global(*) {

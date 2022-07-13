@@ -4,7 +4,7 @@
 		if (session.authenticated) {
 			return {
 				status: 302,
-				redirect: '/',
+				redirect: '/'
 			}
 		}
 		return {}
@@ -14,7 +14,7 @@
 <svelte:head>
 	<link rel="stylesheet" href="/css/login/login.css" />
 	<link rel="stylesheet" href="/css/generics.css" />
-	<link rel="stylesheet" href="/css/voyer/fontawesome-all.min.css" />
+	<link rel="stylesheet" href="/css/all.min.css" />
 </svelte:head>
 
 <slot />

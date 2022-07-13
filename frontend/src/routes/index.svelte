@@ -1,7 +1,7 @@
 <script>
-	import Timeline from '$lib/components/Timeline/Timeline.svelte';
-	import Points from '$lib/components/Widgets/Points.svelte';
-	import Suggestions from '$lib/components/Widgets/Suggestions.svelte';
+	import Details from '$lib/components/Weather/Details.svelte'
+	import Location from '$lib/components/Weather/Location.svelte'
+	import Points from '$lib/components/Widgets/Points.svelte'
 </script>
 
 <svelte:head>
@@ -10,19 +10,17 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-sm-12 col-md-12 col-lg-8">
-			<Timeline />
+		<div class="col-sm-12 col-md-12 col-lg-4">
+			<Location />
 		</div>
-		<aside class="col-sm-12 col-md-12 col-lg-4">
-			<Points />
 
+		<div class="col-sm-12 col-md-12 col-lg-4">
+			<Points />
 			<!-- <Suggestions /> -->
-		</aside>
+		</div>
+
+		<div class="col-sm-12 col-md-12 col-lg-4">
+			<Details />
+		</div>
 	</div>
 </div>
-
-<a class="back-to-top" href="#/">
-	<svg class="back-icon" width="14" height="18">
-		<use xlink:href="#olymp-back-to-top" />
-	</svg>
-</a>
