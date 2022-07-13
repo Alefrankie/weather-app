@@ -15,7 +15,7 @@
 				title="Locations favorite"
 				style="margin-right: 10px;"
 			>
-				<i class="fa fa-flag" />
+				<i class="fa fa-globe" />
 			</figure>
 			<span>Location</span>
 		</header>

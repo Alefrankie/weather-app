@@ -31,14 +31,14 @@
 				<span>
 					Thermal sensation: {$Weather?.current.feelslike_c || ''}
 					<figure class="icon">
-						<i class="fa 	fa-thermometer-full" />
+						<i class="fa fa-thermometer" />
 					</figure>
 				</span>
 
 				<span>
 					Speed Wind: {$Weather?.current.wind_kph + 'K/H' || ''}
 					<figure class="icon">
-						<i class="fa 	fa-fa-gauge" />
+						<i class="fa 	fa-gauge" />
 					</figure>
 				</span>
 
