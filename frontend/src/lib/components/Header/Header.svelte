@@ -22,10 +22,15 @@
 
 			<Favorites />
 		</div>
+	{:else}
+		<div class="menu">
+			<a href="/auth/sign-up">Sign up</a>
+			<a href="/auth/sign-in">Sign in</a>
+		</div>
 	{/if}
 </header>
 
-<style>
+<style lang="scss">
 	header {
 		position: sticky;
 		top: 0;
@@ -44,6 +49,10 @@
 		align-items: center;
 		font-size: 18px;
 		color: var(--primary-color);
+
+		&:hover {
+			color: var(--red-color);
+		}
 	}
 
 	.menu {

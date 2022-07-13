@@ -26,7 +26,7 @@
 			<a href="/history" class="menu__body__title">View all</a>
 		</header>
 
-		<div class="notifications__list">
+		<div class="history_list">
 			<ul>
 				<li>
 					<!-- <Avatar /> -->
@@ -76,9 +76,15 @@
 			.menu__body__title {
 				color: var(--primary-color);
 			}
+			a {
+				color: var(--primary-color);
+				&:hover {
+					color: var(--red-color);
+				}
+			}
 		}
 
-		.notifications__list {
+		.history_list {
 			ul {
 				list-style: none;
 				width: 100%;

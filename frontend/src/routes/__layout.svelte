@@ -1,20 +1,6 @@
 <script lang="ts" context="module">
 	import { browser } from '$app/env'
 	import Header from '$lib/components/Header/Header.svelte'
-
-	export const load = async ({ session }) => {
-		if (!session?.authenticated) {
-			return {
-				status: 302,
-				redirect: '/auth/sign-in'
-			}
-		}
-		// console.count()
-		if (browser) {
-			// Customers
-		}
-		return {}
-	}
 </script>
 
 <svelte:head>

@@ -17,8 +17,6 @@
 			<span>{$Weather.current.last_updated}</span>
 			<span>{useTimeAgo(new Date($Weather.current.last_updated))}</span>
 		</main>
-	{:else if $Weather?.error}
-		{$Weather?.error?.message}
 	{/if}
 {/await}
 

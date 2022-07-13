@@ -1,7 +1,6 @@
 <script>
 	import { session } from '$app/stores'
 	import { http } from '$lib/hooks/useFetch'
-	import { Posts } from '$lib/stores/Posts'
 	// import { SocketStore } from '$lib/stores/Socket'
 
 	export let post
@@ -9,7 +8,7 @@
 
 	async function deletePost() {
 		await http.Delete({
-			url: `/posts/${post.id}`,
+			url: `/posts/${post.id}`
 		})
 
 		window.alert('Publicacion Eliminada')

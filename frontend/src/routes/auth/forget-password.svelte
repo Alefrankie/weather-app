@@ -1,18 +1,15 @@
 <script>
 	import { goto } from '$app/navigation'
 	import { http } from '$lib/hooks/useFetch'
-	import { uppercaseString } from '$lib/utils/string'
 
 	let currentUser = {
-		username: '',
+		username: ''
 	}
-
-	$: currentUser.username = uppercaseString(currentUser.username)
 
 	async function ForgetPassword() {
 		const msg = await http.Post({
 			url: '/users/forget-password',
-			body: currentUser,
+			body: currentUser
 		})
 		goto('/auth/sign-in')
 	}
@@ -49,8 +46,14 @@
 			<div class="content">
 				<h3>Ingresa a VoyerClub</h3>
 				<br />
-				<a href="/auth/sign-in" sveltekit:prefetch style="text-decoration: none;">
-					<button class="btn transparent" id="sign-in-btn"> Inicia Sesión </button>
+				<a
+					href="/auth/sign-in"
+					sveltekit:prefetch
+					style="text-decoration: none;"
+				>
+					<button class="btn transparent" id="sign-in-btn">
+						Inicia Sesión
+					</button>
 				</a>
 			</div>
 			<!-- <img src="/img/base/portada-5.png" class="image" alt="" /> -->

@@ -1,26 +1,23 @@
 <script>
-	import { goto } from '$app/navigation'
-
 	import { session } from '$app/stores'
 	import Avatar from '$lib/components/Avatar.svelte'
 	import { http } from '$lib/hooks/useFetch'
 
 	async function signOut() {
 		await http.Get({
-			url: '/api/users/sign-out',
+			url: '/api/users/sign-out'
 		})
 
 		session.set({
 			...$session,
-			authenticated: false,
+			authenticated: false
 		})
-		goto('/auth/sign-in')
 	}
 </script>
 
 <main>
 	<figure class="menu__icon">
-		<Avatar src={$session.profilePhoto} />
+		<Avatar src={String($session.profilePhoto)} />
 	</figure>
 
 	<div class="menu__body">
@@ -40,15 +37,6 @@
 					<button on:click={signOut}>Cerrar Sesión</button>
 				</li>
 				<hr />
-				<li>
-					<i class="fa fa-sign-out-alt" />
-					<a href="/about">Acerca de</a>
-				</li>
-				<hr />
-				<li>
-					<i class="fa fa-book" />
-					<a href="/terms-and-conditions">Términos y Condiciones</a>
-				</li>
 			</ul>
 		</div>
 	</div>

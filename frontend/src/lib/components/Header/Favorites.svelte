@@ -65,7 +65,7 @@
 			.menu__body__title {
 				color: var(--primary-color);
 			}
-			button {
+			a {
 				color: var(--primary-color);
 				&:hover {
 					color: var(--red-color);

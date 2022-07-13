@@ -56,8 +56,6 @@
 				</span>
 			</div>
 		</main>
-	{:else if $Weather?.error}
-		{$Weather?.error?.message}
 	{/if}
 {/await}
 
