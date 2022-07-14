@@ -25,7 +25,9 @@ export class UserController {
 
 		response.cookie('user', data, {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
-			path: '/'
+			httpOnly: true,
+			path: '/',
+			sameSite: 'lax'
 		})
 
 		return data
@@ -40,6 +42,7 @@ export class UserController {
 
 		response.cookie('user', data, {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
+			httpOnly: true,
 			path: '/'
 		})
 
@@ -70,6 +73,7 @@ export class UserController {
 		const data = await this.userService.update(id, body)
 		response.cookie('user', data, {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
+			httpOnly: true,
 			path: '/'
 		})
 	}
