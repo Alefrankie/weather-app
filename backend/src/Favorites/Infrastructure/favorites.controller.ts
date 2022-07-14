@@ -19,6 +19,7 @@ export class FavoritesController {
 	@Delete('/:favoriteId')
 	async removeOne(@Param() { favoriteId }: { favoriteId: string }) {
 		await this.favoritesService.removeOne({ favoriteId })
+		return { message: 'Favorite removed!' }
 	}
 
 	@Delete('/clear/:userId')
