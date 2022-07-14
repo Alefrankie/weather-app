@@ -25,9 +25,9 @@ export class UserController {
 
 		response.cookie('user', data, {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
-			sameSite: 'none',
 			path: '/',
-			domain: 'weather-app-rho-virid.vercel.app',
+			httpOnly: true,
+			sameSite: 'none',
 			secure: true
 		})
 
@@ -43,9 +43,9 @@ export class UserController {
 
 		response.cookie('user', data, {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
-			sameSite: 'none',
 			path: '/',
-			domain: 'weather-app-rho-virid.vercel.app',
+			httpOnly: true,
+			sameSite: 'none',
 			secure: true
 		})
 
@@ -76,9 +76,9 @@ export class UserController {
 		const data = await this.userService.update(id, body)
 		response.cookie('user', data, {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
-			sameSite: 'none',
 			path: '/',
-			domain: 'weather-app-rho-virid.vercel.app',
+			httpOnly: true,
+			sameSite: 'none',
 			secure: true
 		})
 	}
