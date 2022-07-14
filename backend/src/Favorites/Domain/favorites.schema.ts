@@ -3,14 +3,14 @@ import mongoose, { Document } from 'mongoose'
 import { User } from 'src/User/Domain/user.schema'
 
 @Schema({ timestamps: true })
-export class History {
+export class Favorite {
 	@Prop()
-	text: string
+	location: string
 
 	@Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] })
 	userId: User[]
 }
 
-export type HistoryDocument = History & Document
+export type FavoriteDocument = Favorite & Document
 
-export const HistorySchema = SchemaFactory.createForClass(History)
+export const FavoriteSchema = SchemaFactory.createForClass(Favorite)
