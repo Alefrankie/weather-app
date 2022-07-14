@@ -10,8 +10,15 @@ async function bootstrap() {
 	app.setGlobalPrefix('api')
 	app.enableCors({
 		credentials: true,
-		origin: 'http://localhost:3000',
-		allowedHeaders: 'Content-Type, Accept, Origin'
+		origin: [
+			'https://magical-jewel-production.up.railway.app/',
+			'https://weather-app-rho-virid.vercel.app/auth/sign-in',
+			'https://weather-app-rho-virid.vercel.app',
+			'http://localhost:3000'
+		],
+		allowedHeaders:
+			'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Observe',
+		methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS'
 	})
 
 	await app.listen(process.env.PORT || PORT)

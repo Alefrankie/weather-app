@@ -27,8 +27,7 @@ export class UserController {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
 			httpOnly: true,
 			path: '/',
-			domain: 'localhost',
-			sameSite: 'lax'
+			domain: 'localhost'
 		})
 
 		return data
@@ -45,8 +44,7 @@ export class UserController {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
 			httpOnly: true,
 			path: '/',
-			domain: 'localhost',
-			sameSite: 'lax'
+			domain: 'localhost'
 		})
 
 		return data
@@ -78,8 +76,7 @@ export class UserController {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
 			httpOnly: true,
 			path: '/',
-			domain: 'localhost',
-			sameSite: 'lax'
+			domain: 'localhost'
 		})
 	}
 
