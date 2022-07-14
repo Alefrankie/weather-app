@@ -11,9 +11,9 @@ async function bootstrap() {
 	const options = {
 		credentials: true,
 		// methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-		origin: 'http://localhost:3000',
-		allowedHeaders: 'Content-Type, Accept, Origin'
-		// 'Access-Control-Allow-Origin': '*',
+		origin: '*',
+		allowedHeaders: 'Content-Type, Accept, Origin',
+		'Access-Control-Allow-Origin': '*'
 	}
 	app.enableCors(options)
 
