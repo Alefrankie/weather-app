@@ -10,10 +10,7 @@ async function bootstrap() {
 	app.setGlobalPrefix('api')
 	app.enableCors({
 		credentials: true,
-		origin: [
-			'https://weather-app-rho-virid.vercel.app',
-			'http://localhost:3000'
-		],
+		origin: 'http://localhost:3000',
 		allowedHeaders: 'Content-Type, Accept, Origin'
 	})
 
