@@ -8,13 +8,14 @@ async function bootstrap() {
 	const app = await NestFactory.create(AppModule)
 	app.use(cookieParser())
 	app.setGlobalPrefix('api')
-	const options = {
+	app.enableCors({
 		credentials: true,
-		// methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-		origin: '*',
+		origin: [
+			'https://weather-app-rho-virid.vercel.app',
+			'http://localhost:3000'
+		],
 		allowedHeaders: 'Content-Type, Accept, Origin'
-	}
-	app.enableCors(options)
+	})
 
 	await app.listen(process.env.PORT || PORT)
 	Logger.log(`Application is running on: ${process.env.PORT || PORT}`)
