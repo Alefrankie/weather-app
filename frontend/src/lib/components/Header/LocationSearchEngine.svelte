@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Weather } from '$lib/stores/Weather'
 
-	let key = '1'
+	let key = ''
 	let timeoutId: any = null
 
 	const options = {

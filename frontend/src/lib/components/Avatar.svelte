@@ -1,16 +1,9 @@
 <script>
-	import { HOST_DEFAULT } from '$lib/hooks/useFetch'
-
-	export let src = null
 </script>
 
 <div>
 	<figure>
-		<img
-			loading="lazy"
-			src={src ? `${HOST_DEFAULT}/files/${src}` : '/img/voyer/profile.png'}
-			alt="author"
-		/>
+		<img loading="lazy" src="/img/voyer/profile.png" alt="author" />
 	</figure>
 </div>
 

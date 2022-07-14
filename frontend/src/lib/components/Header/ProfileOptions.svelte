@@ -17,7 +17,7 @@
 
 <main>
 	<figure class="menu__icon">
-		<Avatar src={String($session.profilePhoto)} />
+		<Avatar />
 	</figure>
 
 	<div class="menu__body">

@@ -46,10 +46,4 @@
 			color: var(--red-color);
 		}
 	}
-
-	.description {
-		color: var(--text-color);
-		// border: 1px solid white;
-		text-align: center;
-	}
 </style>
