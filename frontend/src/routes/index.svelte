@@ -4,6 +4,7 @@
 	import Location from '$lib/components/Weather/Location.svelte'
 	import Graphics from '$lib/components/Weather/Graphics.svelte'
 	import { Weather } from '$lib/stores/Weather'
+	import { session } from '$app/stores'
 </script>
 
 <svelte:head>

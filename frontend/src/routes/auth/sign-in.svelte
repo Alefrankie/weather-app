@@ -5,20 +5,28 @@
 	import Loading from '$lib/components/Loading.svelte'
 	import { http } from '$lib/hooks/useFetch'
 
-	let currentUser = {
+	let form = {
 		username: 'Diwaii',
 		password: '123456'
 	}
 
 	let promise: any = null
 	async function signIn() {
-		promise = http.Get({
-			url: '/api/users/sign-in'
+		promise = http.Post({
+			url: '/api/users/sign-in',
+			body: form
 		})
 
-		const { data } = promise
-		if (data) {
-			session.set({ ...$session, authenticated: true })
+		const { _id, fullName, username, password } = await promise
+
+		if (_id) {
+			session.set({
+				_id,
+				fullName: fullName,
+				username: username,
+				password: password,
+				authenticated: true
+			})
 			goto('/')
 		}
 
@@ -34,16 +42,16 @@
 	<div class="row" style="display: flex; justify-content: center;">
 		<main class="col-sm-12 col-md-12 col-lg-4">
 			<header>
-				<figure
-					class="icon"
-					title="Locations favorite"
-					style="margin-right: 10px;"
-				>
-					<i class="fa fa-door-open" />
-				</figure>
 				{#await promise}
 					<Loading />
 				{:then}
+					<figure
+						class="icon"
+						title="Locations favorite"
+						style="margin-right: 10px;"
+					>
+						<i class="fa fa-door-open" />
+					</figure>
 					<span>Sign in</span>
 				{:catch value}
 					<p class="text-warning">{value}</p>
@@ -55,11 +63,7 @@
 					<figure class="icon" title="Locations favorite">
 						<i class="fa fa-user" />
 					</figure>
-					<input
-						placeholder="Usuario"
-						required
-						bind:value={currentUser.username}
-					/>
+					<input placeholder="Usuario" required bind:value={form.username} />
 				</div>
 				<div class="input-field">
 					<figure class="icon" title="Locations favorite">
@@ -69,7 +73,7 @@
 						type="password"
 						placeholder="Contraseña"
 						required
-						bind:value={currentUser.password}
+						bind:value={form.password}
 					/>
 				</div>
 

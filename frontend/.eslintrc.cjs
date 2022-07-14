@@ -34,6 +34,12 @@ module.exports = {
 		'id-length': 'off',
 		'no-negated-condition': 'off',
 		'no-warning-comments': 'off',
-		'no-plusplus': 'off'
+		'no-plusplus': 'off',
+		'no-return-await': 'off',
+		'class-methods-use-this': 'off',
+		'no-magic-numbers': 'off',
+		'one-var': 'off',
+		'no-underscore-dangle': 'off',
+		'new-cap': 'off'
 	}
 }

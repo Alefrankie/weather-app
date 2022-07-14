@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const headers = new Headers({
-	'Content-Type': '*/*',
+	'Content-Type': 'application/json',
 	Accept: '*/*',
-	origin: '*',
+	origin: '*'
 })
 
 // create new Headers
@@ -16,7 +16,7 @@ export const Get = async ({ url }: { url: string }) => {
 	const res = await fetch(HOST + url, {
 		method: 'GET',
 		headers,
-		credentials: 'include',
+		credentials: 'include'
 	})
 
 	const data = await res.json()
@@ -31,6 +31,7 @@ export const Post = async ({ url, body }) => {
 		method: 'POST',
 		headers,
 		body: JSON.stringify(body),
+		credentials: 'include'
 	})
 
 	const data = await res.json()
@@ -44,7 +45,7 @@ export const Put = async ({ url, body }) => {
 	const res = await fetch(HOST + url, {
 		method: 'PUT',
 		headers,
-		body: JSON.stringify(body),
+		body: JSON.stringify(body)
 	})
 
 	const data = await res.json()
@@ -57,7 +58,7 @@ export const Patch = async ({ url, body }) => {
 	const res = await fetch(HOST + url, {
 		method: 'PATCH',
 		headers,
-		body: JSON.stringify(body),
+		body: JSON.stringify(body)
 	})
 
 	const data = await res.json()
@@ -71,7 +72,7 @@ export const Delete = async ({ url, body = {} }) => {
 	const res = await fetch(HOST + url, {
 		method: 'DELETE',
 		headers,
-		body: JSON.stringify(body),
+		body: JSON.stringify(body)
 	})
 
 	const data = await res.json()

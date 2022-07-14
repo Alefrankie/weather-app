@@ -9,7 +9,10 @@
 		})
 
 		session.set({
-			...$session,
+			_id: undefined,
+			fullName: undefined,
+			username: undefined,
+			password: undefined,
 			authenticated: false
 		})
 	}
@@ -22,7 +25,7 @@
 
 	<div class="menu__body">
 		<header>
-			<span class="menu__body__title">Yo</span>
+			<span class="menu__body__title">Yo, {$session.fullName}</span>
 		</header>
 		<hr />
 
@@ -30,11 +33,11 @@
 			<ul>
 				<li>
 					<i class="fas fa-user" />
-					<a href="/{$session.username}">Mi Perfil</a>
+					<a href="/{$session.username}">Perfil</a>
 				</li>
 				<li>
 					<i class="fa fa-sign-out-alt" />
-					<button on:click={signOut}>Cerrar Sesión</button>
+					<button on:click={signOut}>Sign out</button>
 				</li>
 				<hr />
 			</ul>

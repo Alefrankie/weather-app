@@ -5,24 +5,24 @@
 	import Loading from '$lib/components/Loading.svelte'
 	import { http } from '$lib/hooks/useFetch'
 
-	let currentUser = {
+	let form = {
 		fullName: 'Alefrank Martinez',
 		username: 'Diwaii',
 		password: '123456'
 	}
 
 	let promise: any = null
-	async function signIn() {
-		promise = http.Get({
-			url: '/api/users/sign-up'
+	async function signUp() {
+		promise = http.Post({
+			url: '/api/users/sign-up',
+			body: form
 		})
-		// promise = http.Post({
-		// 	url: '/api/users/sign-in',
-		// 	body: currentUser,
-		// })
 
-		session.set({ ...$session, authenticated: true })
-		goto('/')
+		const data = await promise
+		if (data) {
+			session.set({ ...$session, authenticated: true })
+			goto('/')
+		}
 
 		return promise
 	}
@@ -48,27 +48,19 @@
 				{/await}
 			</header>
 
-			<form on:submit|preventDefault={signIn}>
+			<form on:submit|preventDefault={signUp}>
 				<div class="input-field">
 					<figure class="icon">
 						<i class="fa fa-user" />
 					</figure>
-					<input
-						placeholder="Full name"
-						required
-						bind:value={currentUser.fullName}
-					/>
+					<input placeholder="Full name" required bind:value={form.fullName} />
 				</div>
 
 				<div class="input-field">
 					<figure class="icon">
 						<i class="fa fa-user" />
 					</figure>
-					<input
-						placeholder="Usuario"
-						required
-						bind:value={currentUser.username}
-					/>
+					<input placeholder="Usuario" required bind:value={form.username} />
 				</div>
 				<div class="input-field">
 					<figure class="icon">
@@ -78,7 +70,7 @@
 						type="password"
 						placeholder="Contraseña"
 						required
-						bind:value={currentUser.password}
+						bind:value={form.password}
 					/>
 				</div>
 

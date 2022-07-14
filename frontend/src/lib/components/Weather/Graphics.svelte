@@ -1,8 +1,26 @@
-<script>
+<script lang="ts">
+	import { session } from '$app/stores'
+
+	import { http } from '$lib/hooks/useFetch'
+
 	import { useTimeAgo } from '$lib/hooks/useTimeAgo'
+	import type { IFavorite } from '$lib/interfaces/IFavorite'
+	import type { IWeather } from '$lib/interfaces/IWeather'
 
 	import { Weather } from '$lib/stores/Weather'
 	import Loading from '../Loading.svelte'
+
+	const addToFavorites = async (weather: IWeather) => {
+		await http.Post({
+			url: '/api/favorites/',
+			body: {
+				...weather.location,
+				userId: $session._id
+			}
+		})
+
+		alert('Added to favorites')
+	}
 </script>
 
 {#await $Weather}
@@ -11,11 +29,17 @@
 	{#if $Weather?.current}
 		<main>
 			<span class="points">{$Weather.current.condition.text}</span>
-			<figure class="icon" title="Locations favorite" style="font-size: 80px">
+			<figure class="icon" style="font-size: 80px">
 				<i class="fa fa-bolt" />
 			</figure>
 			<span>{$Weather.current.last_updated}</span>
 			<span>{useTimeAgo(new Date($Weather.current.last_updated))}</span>
+			<br />
+			<span>
+				<button class="icon" on:click={() => addToFavorites($Weather)}>
+					Add to favorites &nbsp; <i class="fa fa-star" />
+				</button>
+			</span>
 		</main>
 	{/if}
 {/await}
@@ -45,5 +69,9 @@
 		&:hover {
 			color: var(--red-color);
 		}
+	}
+
+	.icon:hover {
+		color: var(--red-color);
 	}
 </style>

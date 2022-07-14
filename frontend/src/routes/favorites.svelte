@@ -1,5 +1,7 @@
 <script lang="ts" context="module">
 	import { browser } from '$app/env'
+	import { session } from '$app/stores'
+	import { http } from '$lib/hooks/useFetch'
 
 	export const load = async ({ session }) => {
 		if (!session?.authenticated) {
@@ -16,8 +18,40 @@
 	}
 </script>
 
-<script>
+<script lang="ts">
 	import { useTimeAgo } from '$lib/hooks/useTimeAgo'
+	import { Favorites } from '$lib/stores/Favorites'
+
+	// $: Favorites.getAll()
+
+	const remove = async (id: string) => {
+		await http.Delete({
+			url: '/api/favorites/' + id
+		})
+
+		alert('favorite removed')
+		await refresh()
+	}
+
+	const clear = async () => {
+		await http.Delete({
+			url: '/api/favorites/clear/' + $session._id
+		})
+
+		alert('favorites cleared')
+		await refresh()
+	}
+
+	const refresh = async () => {
+		const promise = http.Get({
+			url: `/api/favorites/${$session._id}`
+		})
+
+		const data = await promise
+		Favorites.set(data)
+
+		return promise
+	}
 </script>
 
 <svelte:head>
@@ -28,59 +62,54 @@
 	<div class="row" style="display: flex; justify-content: center;">
 		<main class="col-sm-12 col-md-12 col-lg-6">
 			<header>
-				<figure
-					class="icon"
-					title="Locations favorite"
-					style="margin-right: 10px;"
-				>
-					<i class="fa fa-star" />
-				</figure>
-				<span>Favorites</span>
+				<div>
+					<figure class="icon" style="margin-right: 10px;">
+						<i class="fa fa-star" />
+					</figure>
+					<span>Favorites</span>
+				</div>
+
+				<div>
+					<figure class="icon" style="margin-right: 15px;" on:click={refresh}>
+						<i class="fa fa-arrows-rotate" />
+					</figure>
+
+					<figure class="icon" style="margin-right: 10px;" on:click={clear}>
+						<i class="fa fa-trash" />
+					</figure>
+				</div>
 			</header>
 
-			<div class="history_list">
-				<ul>
-					<li>
-						<!-- <Avatar /> -->
-						<figure
-							class="menu__icon"
-							title="Locations favorite"
-							style="color: var(--primary-color); font-size: 4rem;"
-						>
-							<i class="fa fa-compass" />
-						</figure>
-						<div>
-							<p class="text">Text</p>
+			{#each $Favorites as e}
+				<div class="list">
+					<ul>
+						<li>
+							<!-- <Avatar /> -->
+							<figure
+								class="menu__icon"
+								style="color: var(--primary-color); font-size: 4rem;"
+							>
+								<i class="fa fa-compass" />
+							</figure>
+							<div>
+								<p class="text">{e.name}</p>
 
-							<p class="text">Results: 10</p>
+								<p class="text">{e.region}</p>
 
-							<p class="text">
-								Created at {useTimeAgo(new Date())}
-							</p>
-						</div>
-					</li>
+								<p class="text">{e.country}</p>
 
-					<li>
-						<!-- <Avatar /> -->
-						<figure
-							class="menu__icon"
-							title="Locations favorite"
-							style="color: var(--primary-color); font-size: 4rem;"
-						>
-							<i class="fa fa-compass" />
-						</figure>
-						<div>
-							<p class="text">Text</p>
+								<p class="text">
+									Created at {useTimeAgo(e.createdAt)}
+								</p>
+							</div>
 
-							<p class="text">Results: 10</p>
-
-							<p class="text">
-								Created at {useTimeAgo(new Date())}
-							</p>
-						</div>
-					</li>
-				</ul>
-			</div>
+							<figure class="icon trash" on:click={() => remove(e._id)}>
+								<i class="fa fa-trash" />
+							</figure>
+						</li>
+					</ul>
+				</div>
+			{/each}
 		</main>
 	</div>
 </div>
@@ -102,6 +131,18 @@
 		justify-content: center;
 		font-size: 16px;
 		color: var(--primary-color);
+
+		div:nth-child(1) {
+			flex-grow: 1;
+			display: flex;
+		}
+
+		div:nth-child(2) {
+			display: flex;
+			.icon:hover {
+				color: var(--red-color);
+			}
+		}
 	}
 
 	.text {
@@ -113,7 +154,7 @@
 		font-weight: 600;
 	}
 
-	.history_list {
+	.list {
 		ul {
 			list-style: none;
 			width: 100%;
@@ -131,6 +172,18 @@
 			border: 1px solid var(--primary-color);
 			border-radius: 8px;
 			padding: 1rem;
+			position: relative;
+
+			.icon {
+				z-index: 99999999999;
+				top: 0;
+				right: 10px;
+				font-size: 2rem;
+				position: absolute;
+				&:hover {
+					color: var(--red-color);
+				}
+			}
 			div {
 				display: flex;
 				flex-direction: column;

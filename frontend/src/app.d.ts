@@ -1,4 +1,4 @@
-/// <reference types="@sveltejs/kit" />
+// / <reference types="@sveltejs/kit" />
 
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
@@ -12,13 +12,10 @@ declare namespace App {
 	// interface Platform {}
 
 	interface Session {
-		_id: string
-		profilePhoto: string
-		coverPhoto: string
-		firstName: string
-		lastName: string
-		username: string
-		subscriptions: []
+		_id: string | undefined
+		fullName: string | undefined
+		username: string | undefined
+		password: string | undefined
 		authenticated: boolean
 	}
 	// interface Stuff {}

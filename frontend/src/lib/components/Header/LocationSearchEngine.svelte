@@ -1,4 +1,9 @@
 <script lang="ts">
+	import { session } from '$app/stores'
+
+	import { http } from '$lib/hooks/useFetch'
+	import { Record } from '$lib/stores/Records'
+
 	import { Weather } from '$lib/stores/Weather'
 
 	let key = ''
@@ -23,6 +28,23 @@
 				options
 			).then((res) => res.json())
 			Weather.set(promise)
+
+			if ($session.authenticated) {
+				await http.Post({
+					url: '/api/records/',
+					body: {
+						text: key,
+						userId: $session._id
+					}
+				})
+
+				const data = await http.Get({
+					url: `/api/records/${$session._id}`
+				})
+
+				Record.set(data)
+			}
+
 			// Weather.set({
 			// 	location: {
 			// 		name: 'Caracas',

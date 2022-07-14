@@ -1,5 +1,7 @@
 <script lang="ts" context="module">
 	import { browser } from '$app/env'
+	import { session } from '$app/stores'
+	import { http } from '$lib/hooks/useFetch'
 
 	export const load = async ({ session }) => {
 		if (!session?.authenticated) {
@@ -18,6 +20,28 @@
 
 <script>
 	import { useTimeAgo } from '$lib/hooks/useTimeAgo'
+	import { Record } from '$lib/stores/Records'
+
+	// $: Record.getAll()
+
+	const clear = async () => {
+		await http.Delete({
+			url: '/api/records/clear/' + $session._id
+		})
+
+		alert('records cleared')
+		await refresh()
+	}
+	const refresh = async () => {
+		const promise = http.Get({
+			url: `/api/records/${$session._id}`
+		})
+
+		const data = await promise
+		Record.set(data)
+
+		return promise
+	}
 </script>
 
 <svelte:head>
@@ -28,59 +52,43 @@
 	<div class="row" style="display: flex; justify-content: center;">
 		<main class="col-sm-12 col-md-12 col-lg-6">
 			<header>
-				<figure
-					class="icon"
-					title="Locations favorite"
-					style="margin-right: 10px;"
-				>
-					<i class="fa fa-globe" />
+				<div>
+					<figure class="icon" style="margin-right: 10px;">
+						<i class="fa fa-globe" />
+					</figure>
+					<span>History</span>
+				</div>
+
+				<figure class="icon" style="margin-right: 15px;" on:click={refresh}>
+					<i class="fa fa-arrows-rotate" />
 				</figure>
-				<span>History</span>
+
+				<figure class="icon" style="margin-right: 10px;" on:click={clear}>
+					<i class="fa fa-trash" />
+				</figure>
 			</header>
 
-			<div class="history_list">
-				<ul>
-					<li>
-						<!-- <Avatar /> -->
-						<figure
-							class="menu__icon"
-							title="Locations favorite"
-							style="color: var(--primary-color); font-size: 4rem;"
-						>
-							<i class="fa fa-compass" />
-						</figure>
-						<div>
-							<p class="text">Text</p>
+			{#each $Record as e}
+				<div class="history_list">
+					<ul>
+						<li>
+							<figure
+								class="menu__icon"
+								style="color: var(--primary-color); font-size: 4rem;"
+							>
+								<i class="fa fa-compass" />
+							</figure>
+							<div>
+								<p class="text">{e.text}</p>
 
-							<p class="text">Results: 10</p>
-
-							<p class="text">
-								Created at {useTimeAgo(new Date())}
-							</p>
-						</div>
-					</li>
-
-					<li>
-						<!-- <Avatar /> -->
-						<figure
-							class="menu__icon"
-							title="Locations favorite"
-							style="color: var(--primary-color); font-size: 4rem;"
-						>
-							<i class="fa fa-compass" />
-						</figure>
-						<div>
-							<p class="text">Text</p>
-
-							<p class="text">Results: 10</p>
-
-							<p class="text">
-								Created at {useTimeAgo(new Date())}
-							</p>
-						</div>
-					</li>
-				</ul>
-			</div>
+								<p class="text">
+									Searched at {useTimeAgo(e.createdAt)}
+								</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			{/each}
 		</main>
 	</div>
 </div>
@@ -102,8 +110,16 @@
 		justify-content: center;
 		font-size: 16px;
 		color: var(--primary-color);
+
+		div {
+			flex-grow: 1;
+			display: flex;
+		}
 	}
 
+	.icon:hover {
+		color: var(--red-color);
+	}
 	.text {
 		color: var(--primary-color);
 	}
