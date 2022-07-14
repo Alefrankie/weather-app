@@ -9,7 +9,7 @@ export class HistoryService {
 		@InjectModel(History.name) private userModel: Model<HistoryDocument>
 	) {}
 
-	async findAllByUser(userId: string): History[] {
+	async findAllByUser(userId: string): Promise<History[]> {
 		const data = await this.userModel.find({ userId })
 
 		if (!data) {

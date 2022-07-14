@@ -7,7 +7,7 @@ export class HistoryController {
 	constructor(private historyService: HistoryService) {}
 
 	@Get('/:userId')
-	getAll(@Param() { userId }: { userId: string }): History[] {
+	getAll(@Param() { userId }: { userId: string }): Promise<History[]> {
 		return this.historyService.findAllByUser(userId)
 	}
 }
