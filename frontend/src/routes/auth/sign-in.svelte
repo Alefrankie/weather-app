@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-
+	import cookie from 'cookie'
 	import { session } from '$app/stores'
 	import Loading from '$lib/components/Loading.svelte'
 	import { http } from '$lib/hooks/useFetch'
 
 	let form = {
-		username: '',
-		password: ''
+		username: 'Diwaii',
+		password: '123456'
 	}
 
 	let promise: any = null

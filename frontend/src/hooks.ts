@@ -3,7 +3,9 @@ import cookie from 'cookie'
 import { JSONCookies } from 'cookie-parser'
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const cookies = JSONCookies(cookie.parse(event.request.headers.get('cookie') || ''))
+	const cookies = JSONCookies(
+		cookie.parse(event.request.headers.get('cookie') || '')
+	)
 
 	event.locals.authenticated = false
 	if (cookies.user) {
@@ -13,9 +15,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	return await resolve(event)
 }
-export const getSession = ({ locals }) => {
-	return {
-		...locals.session,
-		authenticated: !!locals.authenticated,
-	}
-}
+export const getSession = ({ locals }) => ({
+	...locals.session,
+	authenticated: Boolean(locals.authenticated)
+})
