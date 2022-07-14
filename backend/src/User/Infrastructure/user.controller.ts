@@ -27,6 +27,7 @@ export class UserController {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
 			sameSite: 'none',
 			path: '/',
+			domain: 'weather-app-rho-virid.vercel.app',
 			secure: true
 		})
 
@@ -44,6 +45,7 @@ export class UserController {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
 			sameSite: 'none',
 			path: '/',
+			domain: 'weather-app-rho-virid.vercel.app',
 			secure: true
 		})
 
@@ -76,6 +78,7 @@ export class UserController {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
 			sameSite: 'none',
 			path: '/',
+			domain: 'weather-app-rho-virid.vercel.app',
 			secure: true
 		})
 	}
