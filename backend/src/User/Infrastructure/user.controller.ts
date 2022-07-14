@@ -26,7 +26,7 @@ export class UserController {
 		response.cookie('user', data, {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
 			sameSite: 'none',
-			domain: 'https://weather-app-rho-virid.vercel.app',
+			path: '/',
 			secure: true
 		})
 
@@ -43,7 +43,7 @@ export class UserController {
 		response.cookie('user', data, {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
 			sameSite: 'none',
-			domain: 'https://weather-app-rho-virid.vercel.app',
+			path: '/',
 			secure: true
 		})
 
@@ -75,7 +75,7 @@ export class UserController {
 		response.cookie('user', data, {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
 			sameSite: 'none',
-			domain: 'https://weather-app-rho-virid.vercel.app',
+			path: '/',
 			secure: true
 		})
 	}
