@@ -15,13 +15,12 @@
 		promise = http.Get({
 			url: '/api/users/sign-in'
 		})
-		// promise = http.Post({
-		// 	url: '/api/users/sign-in',
-		// 	body: currentUser,
-		// })
 
-		session.set({ ...$session, authenticated: true })
-		goto('/')
+		const { data } = promise
+		if (data) {
+			session.set({ ...$session, authenticated: true })
+			goto('/')
+		}
 
 		return promise
 	}

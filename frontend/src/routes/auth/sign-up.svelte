@@ -14,7 +14,7 @@
 	let promise: any = null
 	async function signIn() {
 		promise = http.Get({
-			url: '/api/users/sign-in'
+			url: '/api/users/sign-up'
 		})
 		// promise = http.Post({
 		// 	url: '/api/users/sign-in',
