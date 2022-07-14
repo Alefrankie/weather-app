@@ -8,7 +8,9 @@ import { FavoritesModule } from 'src/Favorites/favorites.module'
 @Module({
 	imports: [
 		HistoryModule,
-		MongooseModule.forRoot('mongodb://localhost/voyer-club'),
+		MongooseModule.forRoot(
+			'mongodb+srv://Diwaii:Diwaii@cluster0.gwm77.mongodb.net/weather_app'
+		),
 		UserModule,
 		FavoritesModule
 	],
