@@ -1,7 +1,6 @@
 <script>
 	import { session } from '$app/stores'
 	import { http } from '$lib/hooks/useFetch'
-	import { uppercaseString } from '$lib/utils/string'
 
 	let MENU = 'PersonalInformation'
 
@@ -9,33 +8,28 @@
 		id: $session.id,
 		firstName: $session.firstName,
 		username: $session.username,
-		paypal: $session.paypal,
 		lastName: $session.lastName,
-		email: $session.email,
-		password: $session.password,
+		password: $session.password
 	}
-
-	$: form.firstName = uppercaseString(form.firstName)
-	$: form.username = uppercaseString(form.username)
-	$: form.lastName = uppercaseString(form.lastName)
-	$: form.email = uppercaseString(form.email)
 
 	const updateProfile = async () => {
 		const data = await http.Post({
 			url: '/users/update-profile',
-			body: form,
+			body: form
 		})
 	}
 
 	let formPass = {
-		id: $session.id,
+		id: $session._id,
 		passActual: '',
 		passNew: '',
-		passConfirm: '',
+		passConfirm: ''
 	}
 	let status = false
 	$: status =
-		formPass.passNew == formPass.passConfirm && formPass.passNew != '' && formPass.passConfirm != ''
+		formPass.passNew == formPass.passConfirm &&
+		formPass.passNew != '' &&
+		formPass.passConfirm != ''
 			? true
 			: false
 
@@ -43,10 +37,10 @@
 		try {
 			const data = await http.Post({
 				url: '/users/update-password',
-				body: formPass,
+				body: formPass
 			})
 		} catch (error) {
-			console.log(error.message)
+			console.log(error)
 		}
 	}
 </script>
@@ -90,7 +84,9 @@
 									</div>
 
 									<div class="form-group label-floating">
-										<label for="account" class="control-label">Cuenta Paypal</label>
+										<label for="account" class="control-label"
+											>Cuenta Paypal</label
+										>
 										<input
 											id="account"
 											class="form-control"
@@ -105,7 +101,8 @@
 
 								<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
 									<div class="form-group label-floating">
-										<label for="lastName" class="control-label">Apellidos</label>
+										<label for="lastName" class="control-label">Apellidos</label
+										>
 										<input
 											for="lastName"
 											class="form-control"
@@ -132,7 +129,9 @@
 								</div>
 
 								<div class="col col-lg-12 col-md-12 col-sm-12 col-12">
-									<button class="btn btn-primary btn-lg full-width">Guardar Cambios</button>
+									<button class="btn btn-primary btn-lg full-width"
+										>Guardar Cambios</button
+									>
 								</div>
 							</div>
 						</form>
@@ -171,7 +170,9 @@
 
 								<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
 									<div class="form-group label-floating is-empty">
-										<label for="passNew" class="control-label">Nueva Contraseña</label>
+										<label for="passNew" class="control-label"
+											>Nueva Contraseña</label
+										>
 										<input
 											class="form-control"
 											type="password"
@@ -185,7 +186,8 @@
 								</div>
 								<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
 									<div class="form-group label-floating is-empty">
-										<label for="passConfirm" class="control-label">Confirmar Nueva Contraseña</label
+										<label for="passConfirm" class="control-label"
+											>Confirmar Nueva Contraseña</label
 										>
 										<input
 											class="form-control"
@@ -202,7 +204,9 @@
 
 							{#if status}
 								<div class="col col-lg-12 col-md-12 col-sm-12 col-12">
-									<button class="btn btn-primary btn-lg full-width">Guardar Cambios</button>
+									<button class="btn btn-primary btn-lg full-width"
+										>Guardar Cambios</button
+									>
 								</div>
 							{/if}
 						</form>
@@ -229,12 +233,20 @@
 								<div class="accordion-body">
 									<ul class="your-profile-menu">
 										<li>
-											<a href="#/" on:click|preventDefault={() => (MENU = 'PersonalInformation')}>
+											<a
+												href="#/"
+												on:click|preventDefault={() =>
+													(MENU = 'PersonalInformation')}
+											>
 												<h6>Información Personal</h6>
 											</a>
 										</li>
 										<li>
-											<a href="#/" on:click|preventDefault={() => (MENU = 'ChangePassword')}>
+											<a
+												href="#/"
+												on:click|preventDefault={() =>
+													(MENU = 'ChangePassword')}
+											>
 												<h6>Cambiar Contraseña</h6>
 											</a>
 										</li>
