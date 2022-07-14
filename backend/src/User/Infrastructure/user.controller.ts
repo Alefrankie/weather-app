@@ -26,6 +26,8 @@ export class UserController {
 		response.cookie('user', data, {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
 			path: '/',
+			httpOnly: true,
+			domain: 'localhost',
 			sameSite: 'none',
 			secure: true
 		})
@@ -43,6 +45,8 @@ export class UserController {
 		response.cookie('user', data, {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
 			path: '/',
+			httpOnly: true,
+			domain: 'localhost',
 			sameSite: 'none',
 			secure: true
 		})
@@ -75,6 +79,8 @@ export class UserController {
 		response.cookie('user', data, {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
 			path: '/',
+			httpOnly: true,
+			domain: 'localhost',
 			sameSite: 'none',
 			secure: true
 		})

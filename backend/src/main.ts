@@ -11,10 +11,10 @@ async function bootstrap() {
 	app.enableCors({
 		credentials: true,
 		origin: [
-			'https://magical-jewel-production.up.railway.app/',
-			'https://weather-app-rho-virid.vercel.app/auth/sign-in',
+			'https://magical-jewel-production.up.railway.app/*',
+			'https://weather-app-rho-virid.vercel.app/*',
 			'https://weather-app-rho-virid.vercel.app',
-			'http://localhost:3000'
+			'http://localhost:3000/*'
 		],
 		allowedHeaders:
 			'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Observe',
