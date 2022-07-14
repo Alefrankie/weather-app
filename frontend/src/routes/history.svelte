@@ -22,7 +22,9 @@
 	import { useTimeAgo } from '$lib/hooks/useTimeAgo'
 	import { Record } from '$lib/stores/Records'
 
-	// $: Record.getAll()
+	$: if (browser) {
+		Record.getAll()
+	}
 
 	const clear = async () => {
 		await http.Delete({

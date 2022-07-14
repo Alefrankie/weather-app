@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation'
+
 	import { session } from '$app/stores'
 
 	import { http } from '$lib/hooks/useFetch'
@@ -19,7 +21,7 @@
 			}
 		})
 
-		alert('Added to favorites')
+		goto('/favorites')
 	}
 </script>
 
@@ -62,7 +64,7 @@
 		color: var(--primary-color);
 	}
 	.points {
-		font-size: 5rem;
+		font-size: 3rem;
 		color: var(--primary-color);
 		// border: 1px solid white;
 		text-align: center;

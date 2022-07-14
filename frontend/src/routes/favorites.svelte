@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 	import { browser } from '$app/env'
+	import { goto } from '$app/navigation'
 	import { session } from '$app/stores'
 	import { http } from '$lib/hooks/useFetch'
 
@@ -21,8 +22,19 @@
 <script lang="ts">
 	import { useTimeAgo } from '$lib/hooks/useTimeAgo'
 	import { Favorites } from '$lib/stores/Favorites'
+	import { Weather } from '$lib/stores/Weather'
 
-	// $: Favorites.getAll()
+	const options = {
+		method: 'GET',
+		headers: {
+			'X-RapidAPI-Key': 'ef0742f166mshbc8f849a5caddacp163f2djsn54cba83d5f58',
+			'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+		}
+	}
+
+	$: if (browser) {
+		Favorites.getAll()
+	}
 
 	const remove = async (id: string) => {
 		await http.Delete({
@@ -51,6 +63,15 @@
 		Favorites.set(data)
 
 		return promise
+	}
+
+	const search = async (location: string) => {
+		const promise = fetch(
+			`https://weatherapi-com.p.rapidapi.com/current.json?q=${location}`,
+			options
+		).then((res) => res.json())
+		Weather.set(promise)
+		goto('/')
 	}
 </script>
 
@@ -103,8 +124,20 @@
 								</p>
 							</div>
 
-							<figure class="icon trash" on:click={() => remove(e._id)}>
+							<figure
+								class="icon trash"
+								style="cursor: pointer;"
+								on:click={() => remove(e._id)}
+							>
 								<i class="fa fa-trash" />
+							</figure>
+
+							<figure
+								class="icon search"
+								style="cursor: pointer;"
+								on:click={() => search(e.name)}
+							>
+								<i class="fa fa-search" />
 							</figure>
 						</li>
 					</ul>
@@ -140,6 +173,7 @@
 		div:nth-child(2) {
 			display: flex;
 			.icon:hover {
+				cursor: pointer;
 				color: var(--red-color);
 			}
 		}
@@ -174,11 +208,19 @@
 			padding: 1rem;
 			position: relative;
 
-			.icon {
-				z-index: 99999999999;
+			.trash {
+				bottom: 0;
+				right: 10px;
+				font-size: 1.5rem;
+				position: absolute;
+				&:hover {
+					color: var(--red-color);
+				}
+			}
+			.search {
 				top: 0;
 				right: 10px;
-				font-size: 2rem;
+				font-size: 1.5rem;
 				position: absolute;
 				&:hover {
 					color: var(--red-color);

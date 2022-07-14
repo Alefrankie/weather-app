@@ -12,7 +12,14 @@
 </script>
 
 <script lang="ts">
+	import { browser } from '$app/env'
+
 	import { useTimeAgo } from '$lib/hooks/useTimeAgo'
+	import { Record } from '$lib/stores/Records'
+
+	$: if (browser) {
+		Record.getAll()
+	}
 </script>
 
 <main>
@@ -28,18 +35,20 @@
 
 		<div class="history_list">
 			<ul>
-				<li>
-					<!-- <Avatar /> -->
-					<figure class="menu__icon" title="Locations favorite">
-						<i class="fa fa-flag" />
-					</figure>
-					<div>
-						<a href="/users/:id">Location</a>
-						<p>
-							Searched at {useTimeAgo(new Date())}
-						</p>
-					</div>
-				</li>
+				{#each $Record.slice(0, 5) as e}
+					<li>
+						<!-- <Avatar /> -->
+						<figure class="menu__icon" title="Locations favorite">
+							<i class="fa fa-flag" />
+						</figure>
+						<div>
+							<span>{e.text}</span>
+							<p>
+								Searched at {useTimeAgo(e.createdAt)}
+							</p>
+						</div>
+					</li>
+				{/each}
 			</ul>
 		</div>
 	</div>
@@ -100,7 +109,7 @@
 					margin-left: 0.5rem;
 					font-weight: 500;
 					width: 90%;
-					a {
+					span {
 						color: var(--primary-color);
 						&:hover {
 							color: var(--red-color);

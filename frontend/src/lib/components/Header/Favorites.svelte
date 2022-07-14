@@ -1,7 +1,12 @@
 <script lang="ts">
-	import { useTimeAgo } from '$lib/hooks/useTimeAgo'
+	import { browser } from '$app/env'
 
-	// Chats.getChats($session._id)
+	import { useTimeAgo } from '$lib/hooks/useTimeAgo'
+	import { Favorites } from '$lib/stores/Favorites'
+
+	$: if (browser) {
+		Favorites.getAll()
+	}
 </script>
 
 <main>
@@ -15,20 +20,23 @@
 			<a href="favorites">View all</a>
 		</header>
 
-		<div class="favorites__list">
+		<div class="list">
 			<ul>
-				<li>
-					<!-- <Avatar /> -->
-					<figure class="menu__icon" title="Locations favorite">
-						<i class="fa fa-flag" />
-					</figure>
-					<div>
-						<a href="/users/:id">Location</a>
-						<p>
-							Added at {useTimeAgo(new Date())}
-						</p>
-					</div>
-				</li>
+				{#each $Favorites.slice(0, 5) as e}
+					<li>
+						<figure class="menu__icon" title="Locations favorite">
+							<i class="fa fa-flag" />
+						</figure>
+						<div>
+							<span>{e.name}</span>
+							<span>{e.region}</span>
+							<span>{e.country}</span>
+							<p>
+								Added at {useTimeAgo(e.createdAt)}
+							</p>
+						</div>
+					</li>
+				{/each}
 			</ul>
 		</div>
 	</div>
@@ -73,7 +81,7 @@
 			}
 		}
 
-		.favorites__list {
+		.list {
 			ul {
 				list-style: none;
 				width: 100%;
@@ -89,7 +97,7 @@
 					margin-left: 0.5rem;
 					font-weight: 500;
 					width: 90%;
-					a {
+					span {
 						color: var(--primary-color);
 						&:hover {
 							color: var(--red-color);
