@@ -43,6 +43,7 @@ module.exports = {
 		'no-useless-constructor': 'off',
 		'no-return-await': 'off',
 		'class-methods-use-this': 'off',
-		'no-magic-numbers': 'off'
+		'no-magic-numbers': 'off',
+		'one-var': 'off'
 	}
 }
