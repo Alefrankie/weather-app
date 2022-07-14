@@ -6,8 +6,8 @@
 	import { http } from '$lib/hooks/useFetch'
 
 	let form = {
-		username: 'Diwaii',
-		password: '123456'
+		username: '',
+		password: ''
 	}
 
 	let promise: any = null
