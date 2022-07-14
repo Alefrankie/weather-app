@@ -137,12 +137,12 @@
 				margin-left: 0.5rem;
 				font-weight: 500;
 				width: 90%;
-				a {
-					color: var(--primary-color);
-					&:hover {
-						color: var(--red-color);
-					}
-				}
+				// a {
+				// 	color: var(--primary-color);
+				// 	&:hover {
+				// 		color: var(--red-color);
+				// 	}
+				// }
 				// p {
 				// 	color: var(--text-color);
 				// 	white-space: nowrap;

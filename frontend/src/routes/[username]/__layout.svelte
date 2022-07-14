@@ -1,11 +1,10 @@
 <script>
-	import { session, page } from '$app/stores'
+	import { page } from '$app/stores'
 	import Loading from '$lib/components/Loading.svelte'
-	import UserPhoto from '$lib/components/UserPhoto.svelte'
 	import { http } from '$lib/hooks/useFetch'
 
 	$: user = http.Get({
-		url: `/api/users/${$page.params.username}`,
+		url: `/api/users/${$page.params.username}`
 	})
 </script>
 
@@ -42,7 +41,6 @@
 					<a href="/{$page.params.username}/rate">Tarifa</a>
 				</li>
 			</ul>
-			<UserPhoto user={$session} />
 		</div>
 	</div>
 

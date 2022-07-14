@@ -5,11 +5,10 @@
 	let MENU = 'PersonalInformation'
 
 	let form = {
-		id: $session.id,
+		_id: $session._id,
 		firstName: $session.firstName,
 		username: $session.username,
-		lastName: $session.lastName,
-		password: $session.password
+		lastName: $session.lastName
 	}
 
 	const updateProfile = async () => {
@@ -82,21 +81,6 @@
 										/>
 										<span class="material-input" />
 									</div>
-
-									<div class="form-group label-floating">
-										<label for="account" class="control-label"
-											>Cuenta Paypal</label
-										>
-										<input
-											id="account"
-											class="form-control"
-											type="email"
-											bind:value={form.paypal}
-											required
-											autocomplete="off"
-										/>
-										<span class="material-input" />
-									</div>
 								</div>
 
 								<div class="col col-lg-6 col-md-6 col-sm-12 col-12">
@@ -108,19 +92,6 @@
 											class="form-control"
 											type="text"
 											bind:value={form.lastName}
-											required
-											autocomplete="off"
-										/>
-										<span class="material-input" />
-									</div>
-
-									<div class="form-group label-floating">
-										<label for="email" class="control-label">Correo</label>
-										<input
-											id="email"
-											class="form-control"
-											type="email"
-											bind:value={form.email}
 											required
 											autocomplete="off"
 										/>

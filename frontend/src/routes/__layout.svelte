@@ -1,5 +1,4 @@
 <script lang="ts" context="module">
-	import { browser } from '$app/env'
 	import Header from '$lib/components/Header/Header.svelte'
 </script>
 
