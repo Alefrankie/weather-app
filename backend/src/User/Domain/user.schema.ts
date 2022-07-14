@@ -1,49 +1,18 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import mongoose, { Document } from 'mongoose'
-import { ROlES } from 'src/App/Contants/ROLES'
-
-export type UserDocument = User & Document
+import { Document } from 'mongoose'
 
 @Schema({ timestamps: true })
 export class User {
-  @Prop()
-  firstName: string
+	@Prop()
+	fullName: string
 
-  @Prop()
-  lastName: string
+	@Prop()
+	username: string
 
-  @Prop()
-  username: string
-
-  @Prop()
-  password: string
-
-  @Prop()
-  email: string
-
-  @Prop()
-  profilePhoto: string
-
-  @Prop()
-  coverPhoto: string
-
-  @Prop({ default: ROlES.USER })
-  role: string
-
-  @Prop()
-  country: string
-
-  @Prop()
-  birthday: string
-
-  @Prop({ default: false })
-  authenticated: boolean
-
-  @Prop({ default: false })
-  online: boolean
-
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] })
-  suggestions: User[]
+	@Prop()
+	password: string
 }
+
+export type UserDocument = User & Document
 
 export const UserSchema = SchemaFactory.createForClass(User)

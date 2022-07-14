@@ -1,105 +1,50 @@
-import {
-  Controller,
-  Get,
-  HttpModule,
-  Logger,
-  NotFoundException,
-  Param,
-  Query,
-  Req,
-  Res,
-} from '@nestjs/common'
-import cookie from 'cookie'
-import { Request, Response } from 'express'
+import { Body, Controller, Get, Param, Res } from '@nestjs/common'
+import { Response } from 'express'
 import { UserService } from '../Application/user.service'
 import { User } from '../Domain/user.schema'
 
 @Controller('/users')
 export class UserController {
-  constructor(private userService: UserService) {}
+	constructor(private userService: UserService) {}
 
-  @Get()
-  getAll(): Promise<User[]> {
-    return this.userService.findAll()
-  }
+	@Get('sign-in')
+	signIn(@Res({ passthrough: true }) response: Response) {
+		const data = {
+			_id: '1',
+			fullName: 'Martínez',
+			username: 'Diwaii',
+			password: 'Alefrank'
+		}
 
-  @Get('sign-in')
-  signIn(@Res({ passthrough: true }) response: Response): any {
-    response.cookie(
-      'user',
-      {
-        _id: '1',
-        firstName: 'Alefrank',
-        lastName: 'Martínez',
-        username: 'Diwaii',
-        profilePhoto: '',
-      },
-      {
-        maxAge: 1000 * 60 * 60 * 24 * 7,
-        httpOnly: true,
-        path: '/',
-      },
-    )
-    return {
-      data: 'authenticated',
-      message: 'authenticated',
-    }
-  }
-  @Get('sign-out')
-  signOut(@Res({ passthrough: true }) response: Response): any {
-    response.clearCookie('user')
-    return {
-      data: 'authenticated',
-      message: 'authenticated',
-    }
-  }
-  @Get('filter')
-  filter(@Query() { key }: { key: string }) {
-    return this.userService.findSuggestions()
-  }
+		response.cookie('user', data, {
+			maxAge: 1000 * 60 * 60 * 24 * 7,
+			httpOnly: true,
+			path: '/'
+		})
 
-  @Get('suggestions')
-  suggestions(
-    @Req() request: Request,
-    @Res({ passthrough: true }) response: Response,
-  ): any {
-    // request.cookies?.user?.id
+		return data
+	}
 
-    // const suggestions = [
-    //   {
-    //     _id: '1',
-    //     firstName: 'Alefrank',
-    //     lastName: 'Martínez',
-    //     username: 'Diwaii',
-    //     profilePhoto: '',
-    //   },
-    //   {
-    //     _id: '2',
-    //     firstName: 'José',
-    //     lastName: 'Theis',
-    //     username: 'JoseT',
-    //     profilePhoto: '',
-    //   },
-    // ]
+	@Get('sign-up')
+	signUp(@Body() body: User) {
+		return body
+	}
 
-    // TODO: get suggestions from database
-    // Cantidad de seguidores
-    // Cantidad de seguidos
-    // Cantidad de amigos
-    // Puntuación
+	@Get('sign-out')
+	signOut(@Res({ passthrough: true }) response: Response) {
+		response.clearCookie('user')
+		return {
+			data: 'authenticated'
+		}
+	}
 
-    return this.userService.findSuggestions()
-  }
-
-  @Get(':username')
-  getByUsername(@Param() { username }): any {
-    // throw new NotFoundException(`${username} not found!`)
-    return {
-      _id: '1',
-      firstName: 'Alefrank',
-      lastName: 'Martínez',
-      username: 'Diwaii',
-      profilePhoto: '',
-    }
-  }
+	@Get(':username')
+	getByUsername(@Param() { username }: { username: string }) {
+		return {
+			_id: '1',
+			fullName: 'Martínez',
+			username: 'Diwaii',
+			password: 'Alefrank'
+		}
+	}
 }
