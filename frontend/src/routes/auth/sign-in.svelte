@@ -6,29 +6,42 @@
 	import { http } from '$lib/hooks/useFetch'
 
 	let form = {
-		username: '',
-		password: ''
+		username: 'Diwaii',
+		password: '123456'
 	}
 
 	let promise: any = null
 	async function signIn() {
-		promise = http.Post({
-			url: '/api/users/sign-in',
-			body: form
+		// promise = http.Post({
+		// 	url: '/api/users/sign-in',
+		// 	body: form
+		// })
+
+		const res = await fetch('/auth/api/sign-in', {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json'
+			},
+			body: JSON.stringify(form),
+			credentials: 'include'
 		})
 
-		const { _id, fullName, username, password } = await promise
+		const data = await res.json()
 
-		if (_id) {
-			session.set({
-				_id,
-				fullName: fullName,
-				username: username,
-				password: password,
-				authenticated: true
-			})
-			goto('/')
-		}
+		console.log(data)
+
+		// const { _id, fullName, username, password } = await promise
+
+		// if (_id) {
+		// 	session.set({
+		// 		_id,
+		// 		fullName: fullName,
+		// 		username: username,
+		// 		password: password,
+		// 		authenticated: true
+		// 	})
+		// 	goto('/')
+		// }
 
 		return promise
 	}
