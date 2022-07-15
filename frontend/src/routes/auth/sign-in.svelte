@@ -4,8 +4,8 @@
 	import Loading from '$lib/components/Loading.svelte'
 
 	let form = {
-		username: 'Diwaii',
-		password: '12345'
+		username: '',
+		password: ''
 	}
 
 	let promise: any = null
