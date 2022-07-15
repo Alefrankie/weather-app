@@ -41,9 +41,6 @@ export const post: RequestHandler = async ({ request }) => {
 
 	return {
 		headers,
-		body: {
-			data: 'user',
-			message: 'User logged successfully'
-		}
+		body: user
 	}
 }
