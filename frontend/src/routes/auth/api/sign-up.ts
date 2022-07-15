@@ -7,7 +7,7 @@ export const post: RequestHandler = async ({ request }) => {
 		const body = await request.json()
 
 		const user = await http.Post({
-			url: '/api/users/sign-in',
+			url: '/api/users/sign-up',
 			body
 		})
 

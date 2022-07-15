@@ -40,6 +40,7 @@ module.exports = {
 		'no-magic-numbers': 'off',
 		'one-var': 'off',
 		'no-underscore-dangle': 'off',
-		'new-cap': 'off'
+		'new-cap': 'off',
+		'@typescript-eslint/no-explicit-any': 'off'
 	}
 }

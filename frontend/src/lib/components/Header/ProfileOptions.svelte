@@ -1,11 +1,14 @@
 <script>
 	import { session } from '$app/stores'
 	import Avatar from '$lib/components/Avatar.svelte'
-	import { http } from '$lib/hooks/useFetch'
 
 	async function signOut() {
-		await http.Get({
-			url: '/api/users/sign-out'
+		await fetch('/auth/api/sign-out', {
+			method: 'GET',
+			headers: {
+				'content-type': 'application/json'
+			},
+			credentials: 'include'
 		})
 
 		session.set({

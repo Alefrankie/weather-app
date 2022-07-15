@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-
 	import { session } from '$app/stores'
 	import Loading from '$lib/components/Loading.svelte'
-	import { http } from '$lib/hooks/useFetch'
 
 	let form = {
 		fullName: '',
@@ -12,19 +10,33 @@
 	}
 
 	let promise: any = null
+
 	async function signUp() {
-		promise = http.Post({
-			url: '/api/users/sign-up',
-			body: form
+		promise = fetch('/auth/api/sign-up', {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json'
+			},
+			body: JSON.stringify(form),
+			credentials: 'include'
+		}).then(async (res) => {
+			const data = await res.json()
+
+			if (!res.ok) throw new Error(data.message)
+
+			const { _id, fullName, username, password } = data
+
+			if (_id) {
+				session.set({
+					_id,
+					fullName: fullName,
+					username: username,
+					password: password,
+					authenticated: true
+				})
+				goto('/')
+			}
 		})
-
-		const data = await promise
-		if (data) {
-			session.set({ ...$session, authenticated: true })
-			goto('/')
-		}
-
-		return promise
 	}
 </script>
 

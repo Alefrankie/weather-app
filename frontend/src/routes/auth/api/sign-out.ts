@@ -2,7 +2,7 @@ import type { RequestHandler } from '@sveltejs/kit'
 import cookie from 'cookie'
 // import jwt from 'jwt-simple'
 
-export const post: RequestHandler = async () => {
+export const get: RequestHandler = () => {
 	const headers = {
 		'Set-Cookie': cookie.serialize('user', '', {
 			path: '/',
