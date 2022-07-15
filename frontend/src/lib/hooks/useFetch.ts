@@ -9,7 +9,9 @@ const headers = new Headers({
 
 // const HOST = 'http://192.168.138.210:3000'
 // const HOST = 'http://localhost:3001'
-const HOST = 'https://magical-jewel-production.up.railway.app'
+const HOST = import.meta.env.DEV
+	? 'http://localhost:3001'
+	: 'https://magical-jewel-production.up.railway.app'
 // const HOST = window.location.protocol + window.location.host
 
 export const Get = async ({ url }: { url: string }) => {
